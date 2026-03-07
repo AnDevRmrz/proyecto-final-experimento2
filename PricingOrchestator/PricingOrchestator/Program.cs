@@ -1,27 +1,29 @@
 namespace PricingOrchestator
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+			// Add services to the container.
 
-            builder.Services.AddControllers();
+			builder.Services.AddControllers();
 
-            var app = builder.Build();
+			builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
-            // Configure the HTTP request pipeline.
+			var app = builder.Build();
 
-            app.UseHttpsRedirection();
+			// Configure the HTTP request pipeline.
 
-            app.UseAuthorization();
+			app.UseHttpsRedirection();
+
+			app.UseAuthorization();
 
 
-            app.MapControllers();
+			app.MapControllers();
 
-            app.Run();
-        }
-    }
+			app.Run();
+		}
+	}
 }
